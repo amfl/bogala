@@ -1,16 +1,33 @@
 const colors = [ "black", "white", "red", "yellow", "blue", "green" ];
 
 const pieces = [
-    { color: [0], x: 2, y: 2 },
-    { color: [1], x: 0, y: 0 },
-    { color: [3], x: 1, y: -1 },
-    { color: [2,0,1], x: 1, y: 0 },
+    { color: [1], x: -2, y: -4 },
+    { color: [1,0,1], x: -1, y: -4 },
+    { color: [0,1,0], x: 0, y: -4 },
+
+    { color: [0], x: -2, y: -3 },
+
+    { color: [2], x: -1, y: -1 },
+    { color: [0], x: 1, y: -1 },
+
+    { color: [0], x: -2, y: 0 },
+    { color: [1], x: 1, y: 0 },
+    { color: [2], x: 2, y: 0 },
+
+    { color: [2], x: -2, y: 1 },
+
+    { color: [1,0,1], x: 0, y: 2 },
+    { color: [1,0], x: 2, y: 2 },
+
+    { color: [1], x: -1, y: 4 },
+    { color: [0,1,0], x: 0, y: 4 },
+    { color: [1], x: 1, y: 4 },
 ];
 
 // Generate a grid with the Honeycomb library
 const Grid = Honeycomb.defineGrid();
 // const grid = Grid.rectangle({ width: 4, height: 4 });
-const grid = Grid.hexagon({ radius: 3 });
+const grid = Grid.hexagon({ radius: 4 });
 console.log(grid);
 
 /////////////////////////////////////////////////////////
