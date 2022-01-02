@@ -1,9 +1,10 @@
 const colors = [ "black", "white", "red", "yellow", "blue", "green" ];
 
 const pieces = [
-    { color: 0, x: 2, y: 2 },
-    { color: 1, x: 0, y: 0 },
-    { color: 2, x: 1, y: 0 }
+    { color: [0], x: 2, y: 2 },
+    { color: [1], x: 0, y: 0 },
+    { color: [3], x: 1, y: -1 },
+    { color: [2,0,1], x: 1, y: 0 },
 ];
 
 // Generate a grid with the Honeycomb library
@@ -17,6 +18,10 @@ console.log(grid);
 const svg = document.getElementById('main');
 
 const hexbin = d3.hexbin();
+
+const stackScale = d3.scaleLinear()
+  .domain([0, 10])
+  .range([0, 3]);
 
 // Draw the board
 d3.select("svg")
@@ -37,21 +42,29 @@ d3.select("svg")
 
 // Draw the pieces
 d3.select("svg")
-    .selectAll('.piece')
+    .selectAll('.stack')
     .data(pieces)
     .enter()
-    .append('circle')
-    .classed('piece', true)
+    .append('g')
     .attr('transform', d => {
         // Figure out where Honeycomb would stick this hex
         const h = Grid.Hex(d.x, d.y);
         const c = h.toPoint();
         return `translate(${c.x}, ${c.y})`
     })
-    .attr('fill', d => colors[d.color])
-    .attr('stroke', 'black')
-    .attr('stroke-width', '0.1')
-    .attr('r', '0.7');
+    .classed('stack', true)
+        .selectAll('.piece')
+        .data(d => d.color)
+        .enter()
+        .append('circle')
+        .classed('piece', true)
+        .attr('fill', d => colors[d])
+        .attr('stroke', 'black')
+        .attr('stroke-width', '0.1')
+        .attr('r', '0.7')
+        .attr('transform', (d, i) => {
+            return `translate(0, -${stackScale(i)})`
+        })
 
 // // No idea why this doesn't render anything.
 // const mesh = document.createElement('path');
