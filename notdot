@@ -1,0 +1,12 @@
+#!/bin/sh
+# Masquerade as graphviz/dot
+
+# I get called with something like:
+# -o/tmp/dot20220106-6-19wfcyw.svg -Tsvg
+
+# Extract filename from args
+filename=$(echo $1 | sed 's/^-o//')
+
+# Call our program
+cd /bogala
+node main-node.js "$filename"
