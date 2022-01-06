@@ -62,7 +62,7 @@ let convertToDataStructure = function(strCode) {
 
 let convertToSvg = function(data, svgNode) {
     console.assert(data.board.type == 'hexhex');
-    console.assert(data.board.size == 5);
+    console.assert(data.board.size > 0);
 
     // Generate a grid with the Honeycomb library
     const Grid = Honeycomb.defineGrid();
@@ -74,7 +74,11 @@ let convertToSvg = function(data, svgNode) {
     const board = Grid.hexagon({ radius: data.board.size - 1 });
     console.log(board);
 
-    let canvas = SVG(svgNode).viewbox(-8, -8, 16, 16);
+    // Dynamically generate viewbox
+    const w = board.pointWidth(),
+          h = board.pointHeight() + 0.5; // Add some height for stacks off the top
+    const dim = data.board.size;
+    let canvas = SVG(svgNode).viewbox(-w/2, -h/2, w, h);
 
     // an SVG symbol can be reused
     const hexSymbol = canvas.symbol()
