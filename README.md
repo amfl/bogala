@@ -5,6 +5,18 @@
 - [X] ES6 modules - Don't need any bundlers or nonsense https://david-gilbertson.medium.com/es6-modules-in-the-browser-are-they-ready-yet-715ca2c94d09
 - [X] Make it work on node
 - [X] Make it work in asciidoc
+- [ ] Accept one line at a time
+- [ ] Order stacks so there are no overlapping issues
+- [ ] Errors/warnings
+- [ ] Square grids
+- [ ] Stack placement on intersections
+- Other language features:
+  - [ ] Arrows
+  - [ ] Lines
+  - [ ] Letters
+  - [ ] symbols
+  - [ ] Piece facing
+  - [ ] Chess pieces?
 
 ## Usage
 
