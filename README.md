@@ -1,6 +1,10 @@
-# d3js experiments
+# BoGaLa (BoardGameLanguage)
 
-Testing out d3 and its suitability to create a board game description language
+## TODO
+
+- [ ] ES6 modules - Don't need any bundlers or nonsense https://david-gilbertson.medium.com/es6-modules-in-the-browser-are-they-ready-yet-715ca2c94d09
+
+## Misc Notes
 
 Could base it off sgf - http://dashstofsk.net/gorilla.html
 http://dashstofsk.net/sgf.html Uses sgf to represent both go and hex boards, so
