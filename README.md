@@ -3,7 +3,8 @@
 ## TODO
 
 - [X] ES6 modules - Don't need any bundlers or nonsense https://david-gilbertson.medium.com/es6-modules-in-the-browser-are-they-ready-yet-715ca2c94d09
-- [ ] Make it work on node
+- [X] Make it work on node
+- [X] Make it work in asciidoc
 
 ## Usage
 
