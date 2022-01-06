@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@svgdotjs/svg.js": "^3.1.1",
+    "honeycomb-grid": "^3.1.8",
+    "svgdom": "^0.1.10"
+  }
+}

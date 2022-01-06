@@ -1,3 +1,6 @@
+import Honeycomb from 'honeycomb-grid';
+import { SVG } from "@svgdotjs/svg.js";
+
 console.log("Lib loaded");
 
 const colors = [ "black", "white", "red", "yellow", "blue", "green" ];
@@ -57,11 +60,7 @@ let convertToDataStructure = function(strCode) {
     return data;
 }
 
-let createCanvas = function() {
-    return SVG().addTo('body').size(600, 600).viewbox(-8, -8, 16, 16);
-}
-
-let convertToSvg = function(data) {
+let convertToSvg = function(data, svgNode) {
     console.assert(data.board.type == 'hexhex');
     console.assert(data.board.size == 5);
 
@@ -75,7 +74,7 @@ let convertToSvg = function(data) {
     const board = Grid.hexagon({ radius: data.board.size - 1 });
     console.log(board);
 
-    let canvas = createCanvas();
+    let canvas = SVG(svgNode).viewbox(-8, -8, 16, 16);
 
     // an SVG symbol can be reused
     const hexSymbol = canvas.symbol()
@@ -88,7 +87,8 @@ let convertToSvg = function(data) {
     board.forEach((cell, i) => {
         console.log(cell);
         const c = cell.toPoint();
-        canvas.use(hexSymbol).translate(c.x, c.y)
+        canvas.use(hexSymbol)
+            .move(c.x, c.y)
     })
 
     // Draw the stacks
@@ -105,14 +105,14 @@ let convertToSvg = function(data) {
         })
     })
 
-    return canvas;
+    return svgNode;
 }
 
-let parse = function(strCode) {
+let parse = function(strCode, svgNode) {
     let data = convertToDataStructure(strCode);
     // console.log(data);
 
-    let svg = convertToSvg(data);
+    let svg = convertToSvg(data, svgNode);
 
     return svg
 }
