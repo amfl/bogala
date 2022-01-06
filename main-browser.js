@@ -1,3 +1,5 @@
+import {parse} from "/bogala-lib.js";
+
 const pieces = [
     { color: [1], x: -2, y: -4 },
     { color: [1,0,1], x: -1, y: -4 },
@@ -50,8 +52,8 @@ s 1 4 1
 console.log("Sup");
 
 // Generate svg
-svg = parse(bogalaCode);
+let svg = parse(bogalaCode);
 
 // Populate svg
-div = document.getElementById('main');
+let div = document.getElementById('main');
 div.innerHTML = svg

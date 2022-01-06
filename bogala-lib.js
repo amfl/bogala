@@ -2,7 +2,7 @@ console.log("Lib loaded");
 
 const colors = [ "black", "white", "red", "yellow", "blue", "green" ];
 
-loadTestDataStructure = function() {
+let loadTestDataStructure = function() {
     return { board: { type: 'hexhex', size: 5 },
              stacks: [
                 { pieces: [1], x: -2, y: -4 },
@@ -30,7 +30,7 @@ loadTestDataStructure = function() {
     };
 }
 
-convertToDataStructure = function(strCode) {
+let convertToDataStructure = function(strCode) {
     let data = {
         board: { type: 'undefined', size: 5 },
         stacks: []
@@ -57,11 +57,11 @@ convertToDataStructure = function(strCode) {
     return data;
 }
 
-createCanvas = function() {
+let createCanvas = function() {
     return SVG().addTo('body').size(600, 600).viewbox(-8, -8, 16, 16);
 }
 
-convertToSvg = function(data) {
+let convertToSvg = function(data) {
     console.assert(data.board.type == 'hexhex');
     console.assert(data.board.size == 5);
 
@@ -75,7 +75,7 @@ convertToSvg = function(data) {
     const board = Grid.hexagon({ radius: data.board.size - 1 });
     console.log(board);
 
-    canvas = createCanvas();
+    let canvas = createCanvas();
 
     // an SVG symbol can be reused
     const hexSymbol = canvas.symbol()
@@ -108,11 +108,11 @@ convertToSvg = function(data) {
     return canvas;
 }
 
-parse = function(strCode) {
-    data = convertToDataStructure(strCode);
+let parse = function(strCode) {
+    let data = convertToDataStructure(strCode);
     // console.log(data);
 
-    svg = convertToSvg(data);
+    let svg = convertToSvg(data);
 
     return svg
 }
@@ -121,4 +121,4 @@ parse = function(strCode) {
  * @namespace {Object} BoGaLa
  */
 
-// export { parse }
+export { parse };

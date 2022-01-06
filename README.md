@@ -2,7 +2,13 @@
 
 ## TODO
 
-- [ ] ES6 modules - Don't need any bundlers or nonsense https://david-gilbertson.medium.com/es6-modules-in-the-browser-are-they-ready-yet-715ca2c94d09
+- [X] ES6 modules - Don't need any bundlers or nonsense https://david-gilbertson.medium.com/es6-modules-in-the-browser-are-they-ready-yet-715ca2c94d09
+- [ ] Make it work on node
+
+## Usage
+
+1. Start a webserver in this dir (required because ES6)
+2. Load up index.html via that webserver
 
 ## Misc Notes
 
