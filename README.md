@@ -10,6 +10,7 @@
 - [ ] Errors/warnings
 - [ ] Square grids
 - [ ] Stack placement on intersections
+- [ ] Work in browser again with no changes
 - Other language features:
   - [ ] Arrows
   - [ ] Lines
@@ -20,8 +21,16 @@
 
 ## Usage
 
-1. Start a webserver in this dir (required because ES6)
-2. Load up index.html via that webserver
+Browser: (Currently broken)
+
+1. ~Start a webserver in this dir (required because ES6)~
+2. ~Load up index.html via that webserver~
+
+Node:
+
+```sh
+node main-node.js [output_filename.svg] < blah.bogala
+```
 
 ## Misc Notes
 
