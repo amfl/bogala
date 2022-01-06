@@ -2,7 +2,7 @@ console.log("Lib loaded");
 
 const colors = [ "black", "white", "red", "yellow", "blue", "green" ];
 
-convertToDataStructure = function(strCode) {
+loadTestDataStructure = function() {
     return { board: { type: 'hexhex', size: 5 },
              stacks: [
                 { pieces: [1], x: -2, y: -4 },
@@ -28,6 +28,33 @@ convertToDataStructure = function(strCode) {
                 { pieces: [1], x: 1, y: 4 },
              ]
     };
+}
+
+convertToDataStructure = function(strCode) {
+    let data = {
+        board: { type: 'undefined', size: 5 },
+        stacks: []
+    };
+
+    const lines = strCode.split('\n');
+    lines.forEach(line => {
+        const tokens = line.match(/[^ ]+/g)
+        if (tokens) {
+            console.log(tokens);
+            if (tokens[0] == 's') {
+                data.stacks.push({
+                    pieces: tokens[3].split(',').map(Number),
+                    x: Number(tokens[1]),
+                    y: Number(tokens[2]),
+                })
+            } else if (tokens[0] == 'board') {
+                data.board.type = tokens[1];
+                data.board.size = Number(tokens[2]);
+            }
+        }
+    });
+
+    return data;
 }
 
 createCanvas = function() {
@@ -82,9 +109,8 @@ convertToSvg = function(data) {
 }
 
 parse = function(strCode) {
-    console.log("Called parse");
-
     data = convertToDataStructure(strCode);
+    // console.log(data);
 
     svg = convertToSvg(data);
 
