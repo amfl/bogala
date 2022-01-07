@@ -1,4 +1,4 @@
-board hex hex 5
+board rect square 8
 s -2 -4 1
 s -1 -4 1,0,1
 s 1 -4  0,1,0

@@ -1,5 +1,6 @@
 import Honeycomb from 'honeycomb-grid';
 import { SVG } from "@svgdotjs/svg.js";
+import generateBoard from './bogala-board-generator.js';
 
 console.log("Lib loaded");
 
@@ -51,8 +52,9 @@ let convertToDataStructure = function(strCode) {
                     y: Number(tokens[2]),
                 })
             } else if (tokens[0] == 'board') {
-                data.board.type = tokens[1];
-                data.board.size = Number(tokens[2]);
+                data.board.topology = tokens[1];
+                data.board.shape = tokens[2];
+                data.board.size = Number(tokens[3]);
             }
         }
     });
@@ -61,49 +63,32 @@ let convertToDataStructure = function(strCode) {
 }
 
 let convertToSvg = function(data, svgNode) {
-    console.assert(data.board.type == 'hexhex');
-    console.assert(data.board.size > 0);
+    console.assert(data.board.size > 0, "Board size must be greater than zero");
 
-    // Generate a grid with the Honeycomb library
-    const Grid = Honeycomb.defineGrid();
-    const Hex = Honeycomb.extendHex({ size: 1, origin: [0.8660254037844386, 1] })
+    const board = generateBoard(data.board);
+    console.log("Generated board: " + board);
 
-    const corners = Hex().corners()
-
-    // const grid = Grid.rectangle({ width: 4, height: 4 });
-    const board = Grid.hexagon({ radius: data.board.size - 1 });
-    console.log(board);
-
-    // Dynamically generate viewbox
-    const w = board.pointWidth(),
-          h = board.pointHeight() + 0.5; // Add some height for stacks off the top
-    const dim = data.board.size;
-    let canvas = SVG(svgNode).viewbox(-w/2, -h/2, w, h);
+    let canvas = SVG(svgNode).viewbox(board.viewbox());
 
     // an SVG symbol can be reused
-    const hexSymbol = canvas.symbol()
-        // map the corners' positions to a string and create a polygon
-        .polygon(corners.map(({ x, y }) => `${x},${y}`))
-        .fill('lightgrey')
-        .stroke({ width: 0.1, color: 'white' })
+    const tileSymbol = board.getTileSymbol(canvas);
 
     // Draw the board
     board.forEach((cell, i) => {
         console.log(cell);
         const c = cell.toPoint();
-        canvas.use(hexSymbol)
+        canvas.use(tileSymbol)
             .move(c.x, c.y)
     })
 
     // Draw the stacks
     data.stacks.forEach((stack, i) => {
-        const h = Grid.Hex(stack.x, stack.y);
-        const c = h.toPoint();
+        const tilePos = board.getTile(stack.x, stack.y).toPoint()
         stack.pieces.forEach((piece, i) => {
             // Draw each piece in the stack
             canvas.circle()
                 .radius(0.7)
-                .translate(c.x, c.y - i*0.2)
+                .translate(tilePos.x, tilePos.y - i*0.2)
                 .fill(colors[piece])
                 .stroke({width: 0.1, color: 'black'});
         })
@@ -114,15 +99,10 @@ let convertToSvg = function(data, svgNode) {
 
 let parse = function(strCode, svgNode) {
     let data = convertToDataStructure(strCode);
-    // console.log(data);
 
     let svg = convertToSvg(data, svgNode);
 
     return svg
 }
-
-/**
- * @namespace {Object} BoGaLa
- */
 
 export { parse };

@@ -18,7 +18,7 @@ const bogalaCode = stdinBuffer.toString();
 const svgNode = document.documentElement
 parse(bogalaCode, svgNode);
 
-console.log(svgNode.outerHTML)
+// console.log(svgNode.outerHTML)
 console.log("Done");
 
 console.log(process.argv);

@@ -8,7 +8,7 @@
 - [ ] Accept one line at a time
 - [ ] Order stacks so there are no overlapping issues
 - [ ] Errors/warnings
-- [ ] Square grids
+- [X] Square grids
 - [ ] Stack placement on intersections
 - [ ] Work in browser again with no changes
 - Other language features:

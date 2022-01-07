@@ -11,4 +11,4 @@ RUN cd /bogala && npm install .
 
 # Add the code which changes often during development
 COPY notdot /usr/bin/dot
-COPY main-node.js bogala-lib.js /bogala/
+COPY *.js /bogala/
