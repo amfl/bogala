@@ -36,7 +36,7 @@ let loadTestDataStructure = function() {
 
 let convertToDataStructure = function(strCode) {
     let data = {
-        board: { type: 'undefined', size: 5 },
+        board: { type: 'undefined', params: null },
         stacks: []
     };
 
@@ -54,7 +54,9 @@ let convertToDataStructure = function(strCode) {
             } else if (tokens[0] == 'board') {
                 data.board.topology = tokens[1];
                 data.board.shape = tokens[2];
-                data.board.size = Number(tokens[3]);
+
+                // Interpreted differently depending on topology and shape
+                data.board.params = tokens.slice(3);
             }
         }
     });
@@ -63,8 +65,6 @@ let convertToDataStructure = function(strCode) {
 }
 
 let convertToSvg = function(data, svgNode) {
-    console.assert(data.board.size > 0, "Board size must be greater than zero");
-
     const board = generateBoard(data.board);
     console.log("Generated board: " + board);
 

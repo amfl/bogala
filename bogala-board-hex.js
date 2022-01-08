@@ -9,7 +9,7 @@ export default class HexBoard extends Board {
         super();
 
         // const grid = Grid.rectangle({ width: 4, height: 4 });
-        this.grid = Grid.hexagon({ radius: boardSpec.size - 1 });
+        this.grid = Grid.hexagon({ radius: Number(boardSpec.params) - 1 });
     }
     getTileSymbol(canvas) {
         const corners = Hex().corners()

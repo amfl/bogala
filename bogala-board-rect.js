@@ -6,9 +6,19 @@ export default class RectBoard extends Board {
     constructor(boardSpec) {
         super();
 
-        // TODO support rectangular boards
-        console.assert(boardSpec.shape == 'square', "Rect topology must be of square shape");
-        this.dimensions = [boardSpec.size, boardSpec.size];
+        if (boardSpec.shape == 'square') {
+            const dim = Number(boardSpec.params[0])
+            this.dimensions = [dim, dim];
+        }
+        else if (boardSpec.shape == 'rect') {
+            this.dimensions = [
+                Number(boardSpec.params[0]),
+                Number(boardSpec.params[1])
+            ];
+        }
+        else {
+            console.assert(false, "Invalid board shape: " + boardSpec.shape);
+        }
 
         for (let i=0;i<this.dimensions[0];++i) {
             for (let j=0;j<this.dimensions[1];++j) {
