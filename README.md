@@ -28,8 +28,16 @@ Browser: (Currently broken)
 
 Node:
 
+Currently bolted into the side of the asciidoc container so it can be used with
+[asciidoctor-diagram][asciidoctor-diagram].
+
 ```sh
-node main-node.js [output_filename.svg] < blah.bogala
+# Build docker image
+docker build -t amfl/asciidoctor .
+
+# Optionally mount the working dir into the container for ease of development
+docker run -it -v $PWD:/tmpdir/ --workdir=/tmpdir --entrypoint=bash amfl/asciidoctor:latest
+node main-node.js [output_filename.svg] < example.bogala
 ```
 
 ## Misc Notes
@@ -49,3 +57,4 @@ I'd like to end up with something like
 https://nestorgames.com/docs/YavalathCo2.pdf
 
 [svg]: <https://svgjs.dev/docs/3.0/>
+[asciidoctor-diagram]: <https://docs.asciidoctor.org/diagram-extension/latest/>
