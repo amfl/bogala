@@ -4,7 +4,7 @@ import generateBoard from './bogala-board-generator.js';
 
 console.log("Lib loaded");
 
-const colors = [ "black", "white", "red", "yellow", "blue", "green" ];
+const colors = [ "DarkSlateGray", "white", "red", "yellow", "blue", "green" ];
 
 let loadTestDataStructure = function() {
     return { board: { type: 'hexhex', size: 5 },
